@@ -10,7 +10,6 @@
 (function( $ ) {
 
     $.fn.thooClock = function(options) {
-        
         this.each(function() {
 
         var cnv,
@@ -45,8 +44,6 @@
             };
 
             settings = $.extend({}, defaults, options);
-
-       
 
             el = this;
             el.size = settings.size;
@@ -87,7 +84,7 @@
             //set alarmtime from outside:
             $.fn.thooClock.changeTime = function(newtime){
                 el.alarmTime = newtime;
-            }
+            };
 
             function toRadians(deg){
                 return ( Math.PI / 180 ) * deg;
@@ -335,7 +332,7 @@
                 e.stopPropagation();
             });
 
-           if(el.onEverySecond !== undefined){
+            if(el.onEverySecond !== undefined){
                 $(el).on('onEverySecond', function(e){
                     el.onEverySecond();
                     e.preventDefault();
@@ -359,7 +356,10 @@
                     mins,
                     h,
                     exth,
-                    extm;
+                    extm,
+                    allExtM,
+                    allAlarmM,
+                    atime;
 
                 theDate = new Date();
                 s = theDate.getSeconds();
@@ -390,11 +390,16 @@
                     atime = el.alarmTime.split(':');
                     exth = atime[0];
                     extm = atime[1];
+                    allExtM = (parseInt(exth,10)*60)+parseInt(extm,10);
                 }
+
+                allAlarmM = (parseInt(hours,10)*60) + parseInt(mins,10);
 
                 //set alarm loop counter
                 //if(h >= timeToDecimal(twelvebased(el.alarmTime)){
-                if(hours >= exth && mins >= extm){
+
+                //alarmMinutes greater than passed Minutes;
+                if(allAlarmM >= allExtM){
                     x+=1; 
                 }
                 //trigger alarm for as many times as i < alarmCount
