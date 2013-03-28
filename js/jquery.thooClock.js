@@ -333,10 +333,12 @@
                 e.stopPropagation();
             });
 
-            $(el).on('onEverySecond', function(e){
-                el.onEverySecond();
-                e.preventDefault();
-            });
+           if(el.onEverySecond !== undefined){
+                $(el).on('onEverySecond', function(e){
+                    el.onEverySecond();
+                    e.preventDefault();
+                });
+            }
 
             $(el).on('offAlarm', function(e){
                 el.offAlarm();
