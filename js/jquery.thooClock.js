@@ -10,6 +10,8 @@
 (function( $ ) {
 
     $.fn.thooClock = function(options) {
+        
+        this.each(function() {
 
         var cnv,
                 ctx,
@@ -44,7 +46,7 @@
 
             settings = $.extend({}, defaults, options);
 
-        this.each(function() {
+       
 
             el = this;
             el.size = settings.size;
