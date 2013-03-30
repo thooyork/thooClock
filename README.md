@@ -48,5 +48,5 @@ Options
 Set Alarm time from outside the plugin:
 <pre>
   var strTime = '14:25'                       // must be hh:mm 
-  $.fn.thooClock.changeTime(inp);
+  $.fn.thooClock.changeTime(strTime);
 </pre>
