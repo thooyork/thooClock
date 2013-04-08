@@ -10,6 +10,7 @@
 (function( $ ) {
 
     $.fn.thooClock = function(options) {
+        
         this.each(function() {
 
         var cnv,
@@ -46,6 +47,7 @@
             settings = $.extend({}, defaults, options);
 
             el = this;
+
             el.size = settings.size;
             el.dialColor = settings.dialColor;
             el.dialBackgroundColor = settings.dialBackgroundColor;
@@ -82,9 +84,12 @@
             ctx.translate(radius, radius); 
 
             //set alarmtime from outside:
+            
             $.fn.thooClock.changeTime = function(newtime){
-                el.alarmTime = newtime;
+                    //alert(el.id);
+                    el.alarmTime = newtime;   
             };
+        
 
             function toRadians(deg){
                 return ( Math.PI / 180 ) * deg;
