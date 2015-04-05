@@ -93,6 +93,7 @@
             $.fn.thooClock.clearAlarm = function(){
                     el.alarmTime = undefined;
                     startClock(0,0);
+                    $(el).trigger('offAlarm');
             };
         
 
