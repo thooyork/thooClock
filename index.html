@@ -35,7 +35,7 @@
 
 		//clock plugin constructor
 		$('#myclock').thooClock({
-			size:document.height/1.4,
+			size:$(document).height()/1.4,
 			onAlarm:function(){
 				//all that happens onAlarm
 				$('#alarm1').show();
@@ -79,6 +79,7 @@
 
 
 	$('#set').click(function(){
+		$.fn.thooClock.clearAlarm();
 		var inp = $('#altime').val();
 		$.fn.thooClock.changeTime(inp);
 	});
