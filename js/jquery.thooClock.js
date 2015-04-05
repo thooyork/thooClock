@@ -85,7 +85,7 @@
 
             //set alarmtime from outside:
             
-            $.fn.thooClock.changeTime = function(newtime){
+            $.fn.thooClock.setAlarm = function(newtime){
                     //alert(el.id);
                     el.alarmTime = newtime;   
             };
