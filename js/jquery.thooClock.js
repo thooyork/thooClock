@@ -89,6 +89,11 @@
                     //alert(el.id);
                     el.alarmTime = newtime;   
             };
+
+            $.fn.thooClock.clearAlarm = function(){
+                    //alert(el.id);
+                    el.alarmTime = null;   
+            };
         
 
             function toRadians(deg){
@@ -139,7 +144,7 @@
                         text = i/5;
                         ctx.textBaseline = 'middle';
                         textSize = parseInt(el.size/13,10);
-                        ctx.font = '100 ' + textSize + ' helvetica';
+                        ctx.font = '100 ' + textSize + 'px helvetica';
                         textWidth = ctx.measureText (text).width;
                         ctx.beginPath();
                         ctx.fillStyle = color;
@@ -273,6 +278,10 @@
                     m = aryTime[1];
                 }
                 return parseInt(h,10) + (m/60);
+            }
+
+            function clearAlarmHand(){
+                ctx.restore();
             }
 
             function drawAlarmHand(alarm, color, tipcolor){
