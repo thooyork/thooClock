@@ -91,8 +91,8 @@
             };
 
             $.fn.thooClock.clearAlarm = function(){
-                    //alert(el.id);
-                    el.alarmTime = null;   
+                    el.alarmTime = undefined;
+                    this.startClock(0,0);
             };
         
 
@@ -278,10 +278,6 @@
                     m = aryTime[1];
                 }
                 return parseInt(h,10) + (m/60);
-            }
-
-            function clearAlarmHand(){
-                ctx.restore();
             }
 
             function drawAlarmHand(alarm, color, tipcolor){
