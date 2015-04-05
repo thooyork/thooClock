@@ -92,7 +92,7 @@
 
             $.fn.thooClock.clearAlarm = function(){
                     el.alarmTime = undefined;
-                    this.startClock(0,0);
+                    startClock(0,0);
             };
         
 
