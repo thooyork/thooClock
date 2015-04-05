@@ -79,6 +79,7 @@
 
 
 	$('#set').click(function(){
+		$.fn.thooClock.clearAlarm();
 		var inp = $('#altime').val();
 		$.fn.thooClock.changeTime(inp);
 	});
