@@ -354,11 +354,13 @@
             }
 
             //listener
-            $(el).on('onAlarm', function(e){
-                el.onAlarm();
-                e.preventDefault();
-                e.stopPropagation();
-            });
+            if(el.onAlarm !== undefined){
+            	$(el).on('onAlarm', function(e){
+                	el.onAlarm();
+                	e.preventDefault();
+                	e.stopPropagation();
+            	});
+            }
 
             if(el.onEverySecond !== undefined){
                 $(el).on('onEverySecond', function(e){
@@ -367,12 +369,13 @@
                 });
             }
 
-            $(el).on('offAlarm', function(e){
-                el.offAlarm();
-                e.stopPropagation();
-                e.preventDefault();
-            });
-
+            if(el.offAlarm !== undefined){
+	            $(el).on('offAlarm', function(e){
+    	            el.offAlarm();
+        	        e.stopPropagation();
+            	    e.preventDefault();
+           		});
+			}
 
             y=0;
 
