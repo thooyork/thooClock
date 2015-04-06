@@ -36,7 +36,7 @@ Options
     brandText:'THOOYORK',                   // uppercase text on clock dial
     brandText2:'Germany',                   // lowercase text on clock dial
     onAlarm:function(){                     // alarm callback function 
-      //callback on Alar
+      //callback on Alarm
     },
     offAlarm:function(){                    // end alarm callback
       //callback on Alarm end
@@ -51,4 +51,9 @@ Set Alarm time from outside the plugin:
 <pre>
   var strTime = '14:25'                       // must be hh:mm 
   $.fn.thooClock.changeTime(strTime);
+</pre>
+
+Clear Alarm from outside the plugin:
+<pre>
+  $.fn.thooClock.clearAlarm();
 </pre>
