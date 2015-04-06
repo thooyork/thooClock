@@ -1,7 +1,7 @@
 // thooClock, a jQuery Clock with alarm function
 // by Thomas Haaf aka thooyork, http://www.smart-sign.com
 // Twitter: @thooyork
-// Version 0.9.13
+// Version 0.9.20
 // Copyright (c) 2013 thooyork
 
 // MIT License, http://opensource.org/licenses/MIT
