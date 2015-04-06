@@ -86,8 +86,27 @@
             //set alarmtime from outside:
             
             $.fn.thooClock.setAlarm = function(newtime){
+                    var thedate;
+                    if(newtime instanceof Date){
+                    	//keep date object
+                    	thedate=newtime;
+                    }
+                    else{
+						//convert from string formatted like hh[:mm[:ss]]]
+						var arr = newtime.split(':');
+						thedate=new Date();
+						for(var i= 0; i <3 ; i++){
+							//force to int
+							arr[i]=Math.floor(arr[i]);
+							//check if NaN or invalid min/sec
+							if( arr[i] !==arr[i] || arr[i] > 59) arr[i]=0 ;
+							//no more than 24h
+							if( i==0 && arr[i] > 23) arr[i]=0 ;
+						}
+						thedate.setHours(arr[0],arr[1],arr[2]);
+                    }
                     //alert(el.id);
-                    el.alarmTime = newtime;   
+                    el.alarmTime = thedate;   
             };
 
             $.fn.thooClock.clearAlarm = function(){
@@ -271,12 +290,10 @@
 
             function timeToDecimal(time){
                 var h,
-                    m,
-                    aryTime;
+                    m;
                 if(time !== undefined){
-                    aryTime = time.split(':');
-                    h = twelvebased(aryTime[0]);
-                    m = aryTime[1];
+                    h = twelvebased(time.getHours());
+                    m = time.getMinutes();
                 }
                 return parseInt(h,10) + (m/60);
             }
@@ -398,13 +415,10 @@
                 }
                
                 if(el.alarmTime !== undefined){
-                    atime = el.alarmTime.split(':');
-                    exth = atime[0];
-                    extm = atime[1];
-                    allExtM = (parseInt(exth,10)*60)+parseInt(extm,10);
+                    allExtM = (el.alarmTime.getHours()*60*60) + (el.alarmTime.getMinutes() *60) + el.alarmTime.getSeconds();
                 }
 
-                allAlarmM = (parseInt(hours,10)*60) + parseInt(mins,10);
+                allAlarmM = (hours*60*60) + (mins*60) + s;
 
                 //set alarm loop counter
                 //if(h >= timeToDecimal(twelvebased(el.alarmTime)){
