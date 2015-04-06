@@ -80,13 +80,12 @@
 
 	$('#set').click(function(){
 		var inp = $('#altime').val();
-		$.fn.thooClock.changeTime(inp);
+		$.fn.thooClock.setAlarm(inp);
 	});
 
 	
 	function alarmBackground(y){
 			var color;
-			console.log(y);
 			if(y===1){
 				color = '#CC0000';
 				y=0;

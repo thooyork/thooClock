@@ -31,7 +31,7 @@ Options
     alarmHandTipColor:'#026729',            // color of tip of alarm hand
     hourCorrection:'+0',                    // hour correction e.g. +5 or -3
     alarmCount:1,                           // how many times should the onAlarm Callback function be fired
-    alarmTime:'14:25',                      // alarm time hh:mm
+    alarmTime:'14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
     showNumerals:true,                      // show numerals on dial true/false
     brandText:'THOOYORK',                   // uppercase text on clock dial
     brandText2:'Germany',                   // lowercase text on clock dial
@@ -47,13 +47,25 @@ Options
  });
 </pre>
 
-Set Alarm time from outside the plugin:
+External Methods 
+-------
+
+**Set Alarm time:**
+
+From a date sting:
 <pre>
-  var strTime = '14:25'                       // must be hh:mm 
-  $.fn.thooClock.changeTime(strTime);
+  var strTime = '14:25'                       // must be "hh", "hh:mm" or "hh:mm:ss"
+  $.fn.thooClock.setAlarm(strTime);
 </pre>
 
-Clear Alarm from outside the plugin:
+From a date object:
+<pre>
+	var alarm_date=new Date();
+	alarm_date.setHours(8,19,30);
+	$.fn.thooClock.setAlarm(alarm_date);
+</pre>
+
+**Clear Alarm:**
 <pre>
   $.fn.thooClock.clearAlarm();
 </pre>
