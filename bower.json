@@ -1,0 +1,28 @@
+{
+  "name": "thooClock",
+  "homepage": "https://github.com/thooyork/thooClock",
+  "authors": [
+    "thooyork <thomas@smart-sign.com>"
+  ],
+  "description": "analogue Alarmclock jQuery Plugin",
+  "main": "js/jquery.thooClock.js",
+  "keywords": [
+    "clock",
+    "watch",
+    "alarm",
+    "alarmclock",
+    "plugin",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
