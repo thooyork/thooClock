@@ -341,11 +341,11 @@
                 if(num !== '+0' && num !== ''){
                     if(num.charAt(0) === '+'){
                         //addNum
-                        return + num.charAt(1);
+                        return + num.substring(1);
                     }
                     else{
                         //subNum
-                        return - num.charAt(1);
+                        return - num.substring(1);
                     }
                 }
                 else{
