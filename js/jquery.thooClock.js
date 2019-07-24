@@ -337,7 +337,18 @@
                 ctx.restore();
             }
 
-            function numberCorrection(num){
+            function timeCorrection(difference, unit) {
+                var parts = difference.split('.');
+                if (unit === 'hours') {
+                    return hoursCorrection(parts[0]);
+                } else if (unit === 'minutes') {
+                    var minutes = parts[1];
+                    if (!(+ minutes)) return 0;
+                    return minutesCorrection(difference.charAt(0) + '0.' + minutes);
+                }
+            }
+
+            function hoursCorrection(num){
                 if(num !== '+0' && num !== ''){
                     if(num.charAt(0) === '+'){
                         //addNum
@@ -351,6 +362,11 @@
                 else{
                     return 0;
                 }
+            }
+
+            function minutesCorrection(num) {
+                var minutesInHours = Number(num);
+                return minutesInHours ? minutesInHours * 60 : 0;
             }
 
             //listener
@@ -395,9 +411,9 @@
                 theDate = new Date();
                 s = theDate.getSeconds();
                 mins = theDate.getMinutes();
-                m = mins + (s/60);
+                m = (mins + timeCorrection(el.hourCorrection, 'minutes')) + (s/60);
                 hours = theDate.getHours();
-                h = twelvebased(hours + numberCorrection(el.hourCorrection)) + (m/60);
+                h = twelvebased(hours + timeCorrection(el.hourCorrection, 'hours')) + (m/60);
 
                 ctx.clearRect(-radius,-radius,el.size,el.size);
 
