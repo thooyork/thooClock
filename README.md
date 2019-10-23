@@ -33,8 +33,12 @@ Options
     alarmCount:1,                           // how many times should the onAlarm Callback function be fired
     alarmTime:'14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
     showNumerals:true,                      // show numerals on dial true/false
+    numeralFont: 'helvetica',               // font for numerals
     brandText:'THOOYORK',                   // uppercase text on clock dial
     brandText2:'Germany',                   // lowercase text on clock dial
+    brandFont:'helvetica',                  // font face for brandText
+    sweepingSeconds: true,                  // sweeping second hand true/false true is like automatic clock, false is ticking
+    sweepingMinutes: true,                  // sweeping minute hand true/false
     onAlarm:function(){                     // alarm callback function 
       //callback on Alarm
     },
