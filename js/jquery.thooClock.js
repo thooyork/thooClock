@@ -95,33 +95,38 @@
             //set alarmtime from outside:
             
             $.fn.thooClock.setAlarm = function(newtime){
-                    var thedate;
-                    if(newtime instanceof Date){
-                    	//keep date object
-                    	thedate=newtime;
-                    }
-                    else{
-						//convert from string formatted like hh[:mm[:ss]]]
-						var arr = newtime.split(':');
-						thedate=new Date();
-						for(var i= 0; i <3 ; i++){
-							//force to int
-							arr[i]=Math.floor(arr[i]);
-							//check if NaN or invalid min/sec
-							if( arr[i] !==arr[i] || arr[i] > 59) arr[i]=0 ;
-							//no more than 24h
-							if( i==0 && arr[i] > 23) arr[i]=0 ;
-						}
-						thedate.setHours(arr[0],arr[1],arr[2]);
-                    }
-                    //alert(el.id);
-                    el.alarmTime = thedate;   
+                el.alarmTime = checkAlarmTime(newtime);
             };
 
             $.fn.thooClock.clearAlarm = function(){
                     el.alarmTime = undefined;
                     startClock(0,0);
                     $(el).trigger('offAlarm');
+            };
+
+
+            function checkAlarmTime(newtime){
+                var thedate;
+                if(newtime instanceof Date){
+                    //keep date object
+                    thedate=newtime;
+                }
+                else{
+                    //convert from string formatted like hh[:mm[:ss]]]
+                    var arr = newtime.split(':');
+                    thedate=new Date();
+                    for(var i= 0; i <3 ; i++){
+                        //force to int
+                        arr[i]=Math.floor(arr[i]);
+                        //check if NaN or invalid min/sec
+                        if( arr[i] !==arr[i] || arr[i] > 59) arr[i]=0 ;
+                        //no more than 24h
+                        if( i==0 && arr[i] > 23) arr[i]=0 ;
+                    }
+                    thedate.setHours(arr[0],arr[1],arr[2]);
+                }
+                //alert(el.id);
+                return thedate;
             };
         
 
@@ -435,6 +440,7 @@
                 drawDial(el.dialColor, el.dialBackgroundColor);
 
                 if(el.alarmTime !== undefined){
+                    el.alarmTime = checkAlarmTime(el.alarmTime);
                     drawAlarmHand(el.alarmTime, el.alarmHandColor, el.alarmHandTipColor);
                 }
                 drawHourHand(h, el.hourHandColor);
