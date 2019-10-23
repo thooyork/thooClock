@@ -41,7 +41,11 @@
                 alarmHandTipColor:'#026729',
                 hourCorrection:'+0',
                 alarmCount:1,
-                showNumerals:true
+                showNumerals:true,
+                sweepingMinutes:true,
+                sweepingSeconds:true,
+                numeralFont:'arial',
+                brandFont:'arial'
             };
 
             settings = $.extend({}, defaults, options);
@@ -58,9 +62,11 @@
             el.alarmHandTipColor = settings.alarmHandTipColor;
             el.hourCorrection = settings.hourCorrection;
             el.showNumerals = settings.showNumerals;
+            el.numeralFont = settings.numeralFont;
 
             el.brandText = settings.brandText;
             el.brandText2 = settings.brandText2;
+            el.brandFont = settings.brandFont;
             
             el.alarmCount = settings.alarmCount;
             el.alarmTime = settings.alarmTime;
@@ -68,6 +74,9 @@
             el.offAlarm = settings.offAlarm;
 
             el.onEverySecond = settings.onEverySecond;
+
+            el.sweepingMinutes = settings.sweepingMinutes;
+            el.sweepingSeconds = settings.sweepingSeconds;
 
             x=0; //loopCounter for Alarm
             
@@ -146,7 +155,6 @@
                 ctx.arc(0,0,dialBackRadius,0,360,false);
                 ctx.fillStyle = bgcolor;
                 ctx.fill();
-
                  
                 for (i=1; i<=60; i+=1) {
                     ang=Math.PI/30*i;
@@ -164,7 +172,7 @@
                         text = i/5;
                         ctx.textBaseline = 'middle';
                         textSize = parseInt(el.size/13,10);
-                        ctx.font = '100 ' + textSize + 'px helvetica';
+                        ctx.font = '100 ' + textSize + 'px ' + el.numeralFont;
                         textWidth = ctx.measureText (text).width;
                         ctx.beginPath();
                         ctx.fillStyle = color;
@@ -190,14 +198,14 @@
                 } 
 
                 if(el.brandText !== undefined){
-                    ctx.font = '100 ' + parseInt(el.size/28,10) + 'px helvetica';
+                    ctx.font = '100 ' + parseInt(el.size/28,10) + 'px ' + el.brandFont;
                     brandtextWidth = ctx.measureText (el.brandText).width;
                     ctx.fillText(el.brandText,-(brandtextWidth/2),(el.size/6)); 
                 }
 
                 if(el.brandText2 !== undefined){
                     ctx.textBaseline = 'middle';
-                    ctx.font = '100 ' + parseInt(el.size/44,10) + 'px helvetica';
+                    ctx.font = '100 ' + parseInt(el.size/44,10) + 'px ' + el.brandFont;
                     brandtextWidth2 = ctx.measureText (el.brandText2).width;
                     ctx.fillText(el.brandText2,-(brandtextWidth2/2),(el.size/5)); 
                 }
@@ -222,14 +230,15 @@
             }
             
 
-            function drawSecondHand(seconds, color){
+            function drawSecondHand(milliseconds, seconds, color){
                 var shlength = (radius)-(el.size/40);
                 
                 ctx.save();
                 ctx.lineWidth = parseInt(el.size/150,10);
                 ctx.lineCap = "round";
                 ctx.strokeStyle = color;
-                ctx.rotate( toRadians(seconds * 6));
+
+                ctx.rotate( toRadians((milliseconds * 0.006) + (seconds * 6)));
 
                 ctx.shadowColor = 'rgba(0,0,0,.5)';
                 ctx.shadowBlur = parseInt(el.size/80,10);
@@ -260,6 +269,10 @@
                 ctx.lineWidth = parseInt(el.size/50,10);
                 ctx.lineCap = "round";
                 ctx.strokeStyle = color;
+               
+                if(!el.sweepingMinutes){
+                    minutes.isInteger ? minutes : minutes = parseInt(minutes);
+                }
                 ctx.rotate( toRadians(minutes * 6));
 
                 ctx.shadowColor = 'rgba(0,0,0,.5)';
@@ -395,8 +408,9 @@
 
             y=0;
 
-            function startClock(x,y){
+            function startClock(x){
                 var theDate,
+                    ms,
                     s,
                     m,
                     hours,
@@ -410,6 +424,7 @@
 
                 theDate = new Date();
                 s = theDate.getSeconds();
+                el.sweepingSeconds ? ms = theDate.getMilliseconds() : ms = 0;
                 mins = theDate.getMinutes();
                 m = (mins + timeCorrection(el.hourCorrection, 'minutes')) + (s/60);
                 hours = theDate.getHours();
@@ -424,13 +439,12 @@
                 }
                 drawHourHand(h, el.hourHandColor);
                 drawMinuteHand(m, el.minuteHandColor);
-                drawSecondHand(s, el.secondHandColor);
+                drawSecondHand(ms, s, el.secondHandColor);
 
                 //trigger every second custom event
-                y+=1;
-                if(y===1){
+                if(y !== s){
                     $(el).trigger('onEverySecond');
-                    y=0;
+                    y = s;
                 }
                
                 if(el.alarmTime !== undefined){
@@ -438,9 +452,6 @@
                 }
 
                 allAlarmM = (hours*60*60) + (mins*60) + s;
-
-                //set alarm loop counter
-                //if(h >= timeToDecimal(twelvebased(el.alarmTime)){
 
                 //alarmMinutes greater than passed Minutes;
                 if(allAlarmM >= allExtM){
@@ -450,11 +461,12 @@
                 if(x <= el.alarmCount && x !== 0){
                    $(el).trigger('onAlarm');
                 }
-                var synced_delay= 1000 - ((new Date().getTime()) % 1000);
-                setTimeout(function(){startClock(x,y);},synced_delay);
+                
+                window.requestAnimationFrame(function(){startClock(x)});
+
             }
 
-            startClock(x,y);
+            startClock(x);
 
    });//return each this;
   };     
