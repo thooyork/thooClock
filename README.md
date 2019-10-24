@@ -21,22 +21,26 @@ Options
 -------
 <pre>
  $('#myDIV').thooClock({
-    size:250,                               // size of the clock
-    dialColor:'#000000',                    // foreground-color of dial can be defined as hex, colorstring, or rgb, rgba function
-    dialBackgroundColor:'transparent',      // background-color of dial
-    secondHandColor:'#F3A829',              // color of second hand
-    minuteHandColor:'#222222',              // color of minute hand
-    hourHandColor:'#222222',                // color of hour hand
-    alarmHandColor:'#FFFFFF',               // color of alarm hand (alarm hand only visible if alarmTime is set to 'hh:mm')
-    alarmHandTipColor:'#026729',            // color of tip of alarm hand
-    hourCorrection:'+0',                    // hour correction e.g. +5 or -3
-    alarmCount:1,                           // how many times should the onAlarm Callback function be fired
-    alarmTime:'14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
-    showNumerals:true,                      // show numerals on dial true/false
+    size: 250,                               // size of the clock
+    dialColor: '#000000',                    // foreground-color of dial can be defined as hex, colorstring, or rgb, rgba function
+    dialBackgroundColor: 'transparent',      // background-color of dial
+    secondHandColor: '#F3A829',              // color of second hand
+    minuteHandColor: '#222222',              // color of minute hand
+    hourHandColor: '#222222',                // color of hour hand
+    alarmHandColor: '#FFFFFF',               // color of alarm hand (alarm hand only visible if alarmTime is set to 'hh:mm')
+    alarmHandTipColor: '#026729',            // color of tip of alarm hand
+    timeCorrection: {                        // time correction object correction can be positive or negative
+      operator: '+'                         // + or -
+      hours: 2                              // number of hours 
+      minutes: 15                           // number of minutes
+    },                    
+    alarmCount: 1,                           // how many times should the onAlarm Callback function be fired
+    alarmTime: '14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
+    showNumerals: true,                      // show numerals on dial true/false
     numeralFont: 'helvetica',               // font for numerals
-    brandText:'THOOYORK',                   // uppercase text on clock dial
-    brandText2:'Germany',                   // lowercase text on clock dial
-    brandFont:'helvetica',                  // font face for brandText
+    brandText: 'THOOYORK',                   // uppercase text on clock dial
+    brandText2: 'Germany',                   // lowercase text on clock dial
+    brandFont: 'helvetica',                  // font face for brandText
     sweepingSeconds: true,                  // sweeping second hand true/false true is like automatic clock, false is ticking
     sweepingMinutes: true,                  // sweeping minute hand true/false
     onAlarm:function(){                     // alarm callback function 

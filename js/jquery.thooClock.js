@@ -1,7 +1,7 @@
 // thooClock, a jQuery Clock with alarm function
 // by Thomas Haaf aka thooyork, http://www.smart-sign.com
 // Twitter: @thooyork
-// Version 0.9.20
+// Version 1.0.2
 // Copyright (c) 2013 thooyork
 
 // MIT License, http://opensource.org/licenses/MIT
@@ -26,7 +26,7 @@
                 hourHandColor,
                 alarmHandColor,
                 alarmHandTipColor,
-                hourCorrection,
+                timeCorrection,
                 x,
                 y;
 
@@ -39,7 +39,11 @@
                 hourHandColor:'#222222',
                 alarmHandColor:'#FFFFFF',
                 alarmHandTipColor:'#026729',
-                hourCorrection:'+0',
+                timeCorrection:{
+                    operator: '+',
+                    hours: 0,
+                    minutes: 0
+                },
                 alarmCount:1,
                 showNumerals:true,
                 sweepingMinutes:true,
@@ -60,7 +64,7 @@
             el.hourHandColor = settings.hourHandColor;
             el.alarmHandColor = settings.alarmHandColor;
             el.alarmHandTipColor = settings.alarmHandTipColor;
-            el.hourCorrection = settings.hourCorrection;
+            el.timeCorrection = settings.timeCorrection;
             el.showNumerals = settings.showNumerals;
             el.numeralFont = settings.numeralFont;
 
@@ -217,15 +221,12 @@
 
             }
 
-
             function twelvebased(hour){
                 if(hour >= 12){
                     hour = hour - 12;
                 }
                 return hour;
             }
-
-
 
             function drawHand(length){
                ctx.beginPath();
@@ -234,7 +235,6 @@
                ctx.stroke();
             }
             
-
             function drawSecondHand(milliseconds, seconds, color){
                 var shlength = (radius)-(el.size/40);
                 
@@ -332,9 +332,7 @@
                 ctx.shadowColor = 'rgba(0,0,0,.5)';
                 ctx.shadowBlur = parseInt(el.size/55, 10);
                 ctx.shadowOffsetX = parseInt(el.size/300, 10);
-                ctx.shadowOffsetY = parseInt(el.size/300, 10);
-
-                //drawHand(ahlength);
+                ctx.shadowOffsetY = parseInt(el.size/300, 10);  
 
                 ctx.beginPath();
                 ctx.moveTo(0,0);
@@ -353,39 +351,7 @@
                 ctx.fillStyle = color;
                 ctx.fill();
                 ctx.restore();
-            }
-
-            function timeCorrection(difference, unit) {
-                var parts = difference.split('.');
-                if (unit === 'hours') {
-                    return hoursCorrection(parts[0]);
-                } else if (unit === 'minutes') {
-                    var minutes = parts[1];
-                    if (!(+ minutes)) return 0;
-                    return minutesCorrection(difference.charAt(0) + '0.' + minutes);
-                }
-            }
-
-            function hoursCorrection(num){
-                if(num !== '+0' && num !== ''){
-                    if(num.charAt(0) === '+'){
-                        //addNum
-                        return + num.substring(1);
-                    }
-                    else{
-                        //subNum
-                        return - num.substring(1);
-                    }
-                }
-                else{
-                    return 0;
-                }
-            }
-
-            function minutesCorrection(num) {
-                var minutesInHours = Number(num);
-                return minutesInHours ? minutesInHours * 60 : 0;
-            }
+            }  
 
             //listener
             if(el.onAlarm !== undefined){
@@ -428,12 +394,25 @@
                     atime;
 
                 theDate = new Date();
+
+                if(el.timeCorrection){
+                    if(el.timeCorrection.operator === '+'){
+                        theDate.setHours(theDate.getHours() + el.timeCorrection.hours);
+                        theDate.setMinutes(theDate.getMinutes() + el.timeCorrection.minutes);
+                    }
+                    if(el.timeCorrection.operator === '-'){
+                        theDate.setHours(theDate.getHours() - el.timeCorrection.hours);
+                        theDate.setMinutes(theDate.getMinutes() - el.timeCorrection.minutes);
+                    }
+                }
+
+    
                 s = theDate.getSeconds();
                 el.sweepingSeconds ? ms = theDate.getMilliseconds() : ms = 0;
                 mins = theDate.getMinutes();
-                m = (mins + timeCorrection(el.hourCorrection, 'minutes')) + (s/60);
+                m = (mins  + (s/60));
                 hours = theDate.getHours();
-                h = twelvebased(hours + timeCorrection(el.hourCorrection, 'hours')) + (m/60);
+                h = twelvebased(hours + (m/60));
 
                 ctx.clearRect(-radius,-radius,el.size,el.size);
 
