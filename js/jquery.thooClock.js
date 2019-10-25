@@ -31,25 +31,26 @@
                 y;
 
        defaults = {
-                size:250,
-                dialColor:'#000000',
+                size: 250,
+                dialColor: '#000000',
                 dialBackgroundColor:'transparent',
-                secondHandColor:'#F3A829',
-                minuteHandColor:'#222222',
-                hourHandColor:'#222222',
-                alarmHandColor:'#FFFFFF',
-                alarmHandTipColor:'#026729',
-                timeCorrection:{
+                secondHandColor: '#F3A829',
+                minuteHandColor: '#222222',
+                hourHandColor: '#222222',
+                alarmHandColor: '#FFFFFF',
+                alarmHandTipColor: '#026729',
+                timeCorrection: {
                     operator: '+',
                     hours: 0,
                     minutes: 0
                 },
-                alarmCount:1,
-                showNumerals:true,
-                sweepingMinutes:true,
-                sweepingSeconds:true,
-                numeralFont:'arial',
-                brandFont:'arial'
+                alarmCount: 1,
+                showNumerals: true,
+                numerals: [1,2,3,4,5,6,7,8,9,10,11,12],
+                sweepingMinutes: true,
+                sweepingSeconds: false,
+                numeralFont: 'arial',
+                brandFont: 'arial'
             };
 
             settings = $.extend({}, defaults, options);
@@ -66,6 +67,7 @@
             el.alarmHandTipColor = settings.alarmHandTipColor;
             el.timeCorrection = settings.timeCorrection;
             el.showNumerals = settings.showNumerals;
+            el.numerals = settings.numerals;
             el.numeralFont = settings.numeralFont;
 
             el.brandText = settings.brandText;
@@ -179,6 +181,7 @@
                         nx = sang * (dialRadius - dialRadius/4.2);
                         ny = cang * -(dialRadius - dialRadius/4.2);
                         text = i/5;
+
                         ctx.textBaseline = 'middle';
                         textSize = parseInt(el.size/13,10);
                         ctx.font = '100 ' + textSize + 'px ' + el.numeralFont;
@@ -186,8 +189,11 @@
                         ctx.beginPath();
                         ctx.fillStyle = color;
 
-                        if(el.showNumerals){
-                            ctx.fillText(text,nx-(textWidth/2),ny);
+                        if(el.showNumerals && el.numerals.length > 0){
+                            el.numerals.map(function(numeral){
+                                text === numeral ? ctx.fillText(text,nx-(textWidth/2),ny) : null;
+                            });
+                            // ctx.fillText(text,nx-(textWidth/2),ny);
                         }
                     //minute marker
                     } else {

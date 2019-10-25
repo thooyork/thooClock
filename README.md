@@ -30,20 +30,21 @@ Options
     alarmHandColor: '#FFFFFF',               // color of alarm hand (alarm hand only visible if alarmTime is set to 'hh:mm')
     alarmHandTipColor: '#026729',            // color of tip of alarm hand
     timeCorrection: {                        // time correction object correction can be positive or negative
-      operator: '+'                         // + or -
-      hours: 2                              // number of hours 
-      minutes: 15                           // number of minutes
+      operator: '+'                          // + or -
+      hours: 2                               // number of hours 
+      minutes: 15                            // number of minutes
     },                    
     alarmCount: 1,                           // how many times should the onAlarm Callback function be fired
     alarmTime: '14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
     showNumerals: true,                      // show numerals on dial true/false
-    numeralFont: 'helvetica',               // font for numerals
+    numerals: [1,2,3,4,5,6,7,8,9,10,11,12],  // numerals to be shown, default is 1 - 12 , could be any number from 1 to 12 e.g. [3,6,9,12] or [2,4,6,8,10,12]
+    numeralFont: 'helvetica',                // font for numerals
     brandText: 'THOOYORK',                   // uppercase text on clock dial
     brandText2: 'Germany',                   // lowercase text on clock dial
     brandFont: 'helvetica',                  // font face for brandText
-    sweepingSeconds: true,                  // sweeping second hand true/false true is like automatic clock, false is ticking
-    sweepingMinutes: true,                  // sweeping minute hand true/false
-    onAlarm:function(){                     // alarm callback function 
+    sweepingSeconds: false,                   // sweeping second hand true/false true is like automatic clock, false is ticking
+    sweepingMinutes: true,                   // sweeping minute hand true/false
+    onAlarm:function(){                      // alarm callback function 
       //callback on Alarm
     },
     offAlarm:function(){                    // end alarm callback
