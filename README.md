@@ -37,7 +37,20 @@ Options
     alarmCount: 1,                           // how many times should the onAlarm Callback function be fired
     alarmTime: '14:25',                      // alarm time as Date object or String : "hh", "hh:mm", "hh:mm:ss"
     showNumerals: true,                      // show numerals on dial true/false
-    numerals: [1,2,3,4,5,6,7,8,9,10,11,12],  // numerals to be shown, default is 1 - 12 , could be any number from 1 to 12 e.g. [3,6,9,12] or [2,4,6,8,10,12]
+    numerals: [                              // Array of Objects with numbers as keys
+      {1:1},                                 // values can be any String or number. You can draw roman dial by
+      {2:2},                                 // passing the following key/values:
+      {3:3},                                 // {1:'I'},{2:'II'},{3:'III'},{4:'IV'},{5:'V'},{6:'VI'},{7:'VII'}
+      {4:4},                                 // {8:'VIII'}, {9:'IX'}, {10:'X'}, {11:'XI'}, {12:'XII'}
+      {5:5},                                 // You don't have to set all 12 you could only set e.g. 3,6,9,12
+      {6:6},
+      {7:7},
+      {8:8},
+      {9:9},
+      {10:10},
+      {11:11},
+      {12:12}
+    ],
     numeralFont: 'helvetica',                // font for numerals
     brandText: 'THOOYORK',                   // uppercase text on clock dial
     brandText2: 'Germany',                   // lowercase text on clock dial

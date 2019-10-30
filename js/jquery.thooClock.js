@@ -46,7 +46,20 @@
                 },
                 alarmCount: 1,
                 showNumerals: true,
-                numerals: [1,2,3,4,5,6,7,8,9,10,11,12],
+                numerals: [
+                    {1:1},
+                    {2:2},
+                    {3:3},
+                    {4:4},
+                    {5:5},
+                    {6:6},
+                    {7:7},
+                    {8:8},
+                    {9:9},
+                    {10:10},
+                    {11:11},
+                    {12:12}
+                ],
                 sweepingMinutes: true,
                 sweepingSeconds: false,
                 numeralFont: 'arial',
@@ -180,20 +193,21 @@
                         ey = cang * - dialRadius;
                         nx = sang * (dialRadius - dialRadius/4.2);
                         ny = cang * -(dialRadius - dialRadius/4.2);
-                        text = i/5;
+                        marker = i/5;
 
                         ctx.textBaseline = 'middle';
                         textSize = parseInt(el.size/13,10);
                         ctx.font = '100 ' + textSize + 'px ' + el.numeralFont;
-                        textWidth = ctx.measureText (text).width;
                         ctx.beginPath();
                         ctx.fillStyle = color;
 
                         if(el.showNumerals && el.numerals.length > 0){
                             el.numerals.map(function(numeral){
-                                text === numeral ? ctx.fillText(text,nx-(textWidth/2),ny) : null;
+                                if(marker == Object.keys(numeral)){
+                                    textWidth = ctx.measureText (numeral[marker]).width;
+                                    ctx.fillText(numeral[marker],nx-(textWidth/2),ny);
+                                }
                             });
-                            // ctx.fillText(text,nx-(textWidth/2),ny);
                         }
                     //minute marker
                     } else {
