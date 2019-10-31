@@ -10,7 +10,7 @@ Implementation
 
 <pre>
 &lt;script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt; 
-&lt;script language="javascript" type="text/javascript" src="js/jquery.thooClock.js"&gt;&lt;/script&gt;  	
+&lt;script language="javascript" type="text/javascript" src="js/jquery.thooClock.min.js"&gt;&lt;/script&gt;  	
 
 &lt;script language="javascript" type="text/javascript"&gt;
   $('#myDIV').thooClock();
