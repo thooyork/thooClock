@@ -3,6 +3,8 @@ thooClock
 
 a jQuery analogue clock plugin with alarm function.
 
+![thooClock](screenshot_thooclock.png?raw=true =250x "thooClock")
+
 <a href="http://www.smart-sign.com/thooclock">visit the site</a>
 
 Implementation
