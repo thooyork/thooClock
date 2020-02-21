@@ -1,10 +1,10 @@
 // thooClock, a jQuery Clock with alarm function
-// by Thomas Haaf aka thooyork, http://www.smart-sign.com
+// by Thomas Haaf aka thooyork, https://www.smart-sign.com
 // Twitter: @thooyork
 // Version 1.0.2
 // Copyright (c) 2013 thooyork
 
-// MIT License, http://opensource.org/licenses/MIT
+// MIT License, https://opensource.org/licenses/MIT
 
 
 (function( $ ) {

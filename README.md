@@ -5,13 +5,13 @@ a jQuery analogue clock plugin with alarm function.
 
 ![thooClock](screenshot_thooclock.png?raw=true "thooClock")
 
-<a href="http://www.smart-sign.com/thooclock">visit the site</a>
+<a href="https://www.smart-sign.com/thooclock">visit the site</a>
 
 Implementation
 --------------
 
 <pre>
-&lt;script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt; 
+&lt;script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt; 
 &lt;script language="javascript" type="text/javascript" src="js/jquery.thooClock.min.js"&gt;&lt;/script&gt;  	
 
 &lt;script language="javascript" type="text/javascript"&gt;
