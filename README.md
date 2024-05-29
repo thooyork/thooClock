@@ -1,10 +1,9 @@
 
+
 ## Deprecation warning
-This repo is deprecard it will not be maintained any longer. Feel free to use/fork it anyway.
+⚠️ This repo is deprecard - it will not be maintained any longer. Feel free to use/fork it anyway.
 
-Try its web component based successor here:
-
- <a href="https://www.npmjs.com/package/thy-clock">ThyClock on npm</a>
+Try its web-component based successor here: <a href="https://www.npmjs.com/package/thy-clock">ThyClock on npm</a>
 
 
 thooClock
